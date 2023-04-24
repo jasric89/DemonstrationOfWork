@@ -1,0 +1,9 @@
+**/.terraform
+**/.terraform.lock.hcl
+terraform.tfstate
+.tfstate*
+terraform.log*
+tfplan.txt
+conf
+terraformconfig.conf
+
