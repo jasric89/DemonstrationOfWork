@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "jc-eks" {
   role_arn = aws_iam_role.eks-iam-role.arn
 
   vpc_config {
-    subnet_ids = [aws_subnet.eks-subnet.id]
+    subnet_ids = [aws_subnet.public_subnets[0].id,aws_subnet.public_subnets[1].id, aws_subnet.public_subnets[2].id]
   }
 
   depends_on = [
@@ -15,7 +15,7 @@ resource "aws_eks_node_group" "worker-node-group" {
   cluster_name    = aws_eks_cluster.jc-eks.name
   node_group_name = "jc-workernodes"
   node_role_arn   = aws_iam_role.workernodes.arn
-  subnet_ids      = [aws_subnet.eks-subnet.id]
+  subnet_ids      = [aws_subnet.public_subnets[0].id,aws_subnet.public_subnets[1].id, aws_subnet.public_subnets[2].id]
   instance_types  = ["t3a.small"]
 
   scaling_config {
