@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  application.instanceLabelKey: argocd.argoproj.io/instance
+  repositories: |
+    - name: TenantDeploiements
+      type: git
+      url: git@github.com:jasric89/DemonstrationOfWork.git
+  repository.credentials: |
+    - url: git@github.com:jasric89/DemonstrationOfWork.git
+      sshPrivateKeySecret:
+        name: argocd-repository-credentials
+        key: tenantdeploiement
+clusterAdminAccess:
+  enabled: true
